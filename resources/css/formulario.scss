@@ -1,0 +1,11 @@
+.modal-dialog{
+    background-color: rgb(230, 18, 18);
+}
+body {
+    overflow-x: hidden; /* Oculta el desbordamiento horizontal */
+}
+
+.container {
+    max-width: 100%; /* Asegura que el contenedor no se desborde */
+    padding: 15px;
+}
