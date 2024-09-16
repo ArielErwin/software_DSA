@@ -1,4 +1,9 @@
 import './bootstrap';
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+Alpine.start();
+
 $(document).on('click', '.btn-editar', function() {
     var documentoId = $(this).data('id');
     loadEditForm(documentoId);
@@ -28,24 +33,3 @@ function loadEditForm(documentoId) {
     });
 }
 
-/*
-function loadEditForm(id) {
-    fetch(`/documentos/${id}/edit`)
-        .then(response => response.json())
-        .then(data => {
-            // Rellenar los campos del formulario con los datos del documento
-        
-            document.getElementById('fecha').value = data.fecha;
-            document.getElementById('nro_carta').value = data.nro_carta;
-            document.getElementById('procedencia').value = data.procedencia;
-            document.getElementById('nombre_archivo').value = data.nombre_archivo;
-            document.getElementById('detalle').value = data.detalle;
-            document.getElementById('editarDocumentoForm').action = `/documentos/${data.id}`;
-            document.getElementById('editardocumentoForm').method = 'POST'; // Asegúrate de que el método sea POST
-            
-            // Mostrar el modal
-            var myModal = new bootstrap.Modal(document.getElementById('editarDocumentoModal'));
-            myModal.show();
-        })
-    .catch(error => console.error('Error:', error));
-    }*/

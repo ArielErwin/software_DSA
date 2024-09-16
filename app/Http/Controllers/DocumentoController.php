@@ -55,7 +55,7 @@ class DocumentoController extends Controller
         // Obtener los documentos filtrados
         $documentos = $query->get();
 
-        return view('layouts.tabla', compact('documentos'));
+        return view('welcome', compact('documentos'));
     }
 
     // Mostrar la página de bienvenida
@@ -65,6 +65,13 @@ class DocumentoController extends Controller
     // Si necesitas mostrar un documento específico para editar, pásalo aquí
     // Por ejemplo, el primer documento:
     $documento = Documento::first(); // O encuentra el documento que necesitas
+    // Obtener los documentos eliminados de la sesión
+    $documentosEliminados = session()->get('documentos_eliminados', []);
+
+    // Filtrar los documentos "eliminados" para que no se muestren en la vista
+    if (!empty($documentosEliminados)) {
+        $documentos = $documentos->whereNotIn('id', $documentosEliminados);
+    }
     return view('welcome', compact('documentos', 'documento'));
 }
 
@@ -107,9 +114,17 @@ class DocumentoController extends Controller
     // Eliminar documento
     public function destroy($id)
     {
-        $documento = Documento::findOrFail($id);
-        $documento->delete();
-
+        //$documento = Documento::findOrFail($id);
+        //$documento->delete();
+        // Obtén el array actual de documentos "eliminados" en la sesión
+        $documentosEliminados = session()->get('documentos_eliminados', []);
+    
+        // Agregar el ID del documento eliminado a la lista
+        $documentosEliminados[] = $id;
+    
+        // Guardar la lista actualizada en la sesión
+        session()->put('documentos_eliminados', $documentosEliminados);
+    
         return redirect()->route('welcome')->with('success', 'Documento eliminado exitosamente');
     }
 
@@ -126,4 +141,3 @@ class DocumentoController extends Controller
         ]);
     }
 }
-

@@ -6,6 +6,8 @@
         </video>
             <h1>Registro de Documentación</h1>
             <h2>Dirección de Servicios Académicos</h2>
+        <x-app-layout>
+        </x-app-layout>
             <div id="wave" style="height: 140px; " >
                 <div style="overflow: hidden;">
                     <svg

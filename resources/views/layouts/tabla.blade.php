@@ -21,7 +21,7 @@
                 <th>Fecha</th>
                 <th>Nro Carta</th>
                 <th>Procedencia</th>
-                <th>Detalle</th>
+                <th class="detalle">Detalle</th>
                 <th>Nombre Archivo</th>
                 <th>Repositorio</th>
                 <th>Acción</th>
@@ -30,21 +30,17 @@
 
         <tbody>
             @foreach ($documentos as $documento)
-                <tr>
+            <tr data-id="{{ $documento->id }}"> 
                     <td>{{ $documento->id }}</td>
                     <td>{{ $documento->fecha }}</td>
                     <td>{{ $documento->nro_carta }}</td>
                     <td>{{ $documento->procedencia }}</td>
-                    <td>{{ $documento->detalle }}</td>
+                    <td class="detalle">{{ $documento->detalle }}</td>
                     <td>{{ $documento->nombre_archivo }}</td>
                     <td><a href="{{ Storage::url($documento->repositorio) }}" target="_blank">Ver archivo</a></td>
                     <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                            
-                            
                             <button class="btn btn-editar" data-id="{{ $documento->id }}">Editar</button>
-
-
                                 <form action="{{ route('documentos.destroy', $documento->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
@@ -53,7 +49,7 @@
                             </div>
                         </td>
                 </tr>
-            @endforeach
+            @endforeach 
     </tbody>
 </table>
 </div>
